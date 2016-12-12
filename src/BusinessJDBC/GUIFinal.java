@@ -11,7 +11,7 @@ public class GUIFinal extends JFrame
 {
     //** Panels **\\
                    //panels for HR tab
-    private JPanel titlePanel, employeePanel, employeePositionInfoPanel, employeeTypeInfoPanel, employeeBasicInfoPanel, 
+    private JPanel titlePanel, employeePanel = new JPanel(), employeePositionInfoPanel, employeeTypeInfoPanel, employeeBasicInfoPanel, 
                    //panels for INV tab
                    productPanel, manufacturerPanel,
                    //bottom panel for buttons
@@ -81,6 +81,11 @@ public class GUIFinal extends JFrame
         buildINVManufacturerPanel();
         
         buildButtonPanel();
+        
+        employeePanel.setLayout(new GridLayout(0,1));
+        employeePanel.add(employeeBasicInfoPanel, BorderLayout.NORTH);
+        employeePanel.add(employeePositionInfoPanel, BorderLayout.CENTER);
+        employeePanel.add(employeeTypeInfoPanel, BorderLayout.SOUTH);
         
         tier2TabPane.addTab("Products", null, productPanel, "Products");
         tier2TabPane.addTab("Manufacturers", null, manufacturerPanel, "Manufacturers");
@@ -217,16 +222,61 @@ public class GUIFinal extends JFrame
         employeeBasicInfoPanel.setBorder(
                 BorderFactory.createTitledBorder("Employee Information"));
         
+        lblEmpTitle = new JLabel("Title:");
+        txtEmpTitle = new JTextField(10);
+        lblEmpNum = new JLabel("Employee Num:");
+        txtEmpNum = new JTextField(10);
         
         //set a border for position info
         employeePositionInfoPanel.setBorder(
                 BorderFactory.createTitledBorder("Position Information"));
         
-        
+        lblCommissionRate = new JLabel("Commission Rate:");
+        txtCommissionRate = new JTextField(5);
+        lblTotalSales = new JLabel("Total Sales:");
+        txtTotalSales = new JTextField(5);
+        lblPayRate = new JLabel("Pay Rate:");
+        txtPayRate = new JTextField(5);
+        lblHoursWorked = new JLabel("Hours Worked:");
+        txtHoursWorked = new JTextField(5);
+        lblSalary = new JLabel("Salary:");
+        txtSalary = new JTextField(5);
         
         //set a border for type info
         employeeTypeInfoPanel.setBorder(
                 BorderFactory.createTitledBorder("Type Information"));
+        
+        //add the components to the basic employee info subpanels
+        employeeBasicInfoPanel.add(lblFirstName);
+        employeeBasicInfoPanel.add(txtFirstName);
+        employeeBasicInfoPanel.add(lblLastName);
+        employeeBasicInfoPanel.add(txtLastName);
+        employeeBasicInfoPanel.add(lblBirthdate);
+        employeeBasicInfoPanel.add(txtBirthdate);
+        employeeBasicInfoPanel.add(lblGender);
+        employeeBasicInfoPanel.add(txtGender);
+        employeeBasicInfoPanel.add(lblAddress);
+        employeeBasicInfoPanel.add(txtAddress);
+        employeeBasicInfoPanel.add(lblContactNum);
+        employeeBasicInfoPanel.add(txtContactNum);
+        
+        employeePositionInfoPanel.add(lblEmpTitle);
+        employeePositionInfoPanel.add(txtEmpTitle);
+        employeePositionInfoPanel.add(lblEmpNum);
+        employeePositionInfoPanel.add(txtEmpNum);
+        
+        //adding the components to the type info panel
+        employeeTypeInfoPanel.add(lblCommissionRate);
+        employeeTypeInfoPanel.add(lblCommissionRate);
+        employeeTypeInfoPanel.add(txtCommissionRate);
+        employeeTypeInfoPanel.add(lblTotalSales);
+        employeeTypeInfoPanel.add(txtTotalSales);
+        employeeTypeInfoPanel.add(lblPayRate);
+        employeeTypeInfoPanel.add(txtPayRate);
+        employeeTypeInfoPanel.add(lblHoursWorked);
+        employeeTypeInfoPanel.add(txtHoursWorked);
+        employeeTypeInfoPanel.add(lblSalary);
+        employeeTypeInfoPanel.add(txtSalary);
         
         
     }
