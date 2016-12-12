@@ -206,12 +206,12 @@ public class DatabasePane extends JPanel{
         }
         //if there are more than 15 textFields, then the app will go offscreen
         //so, to account for the field size, shrink the JTabel panel with setPreferredSize()
-        System.out.println(table);
+        //System.out.println(table);
         //System.out.println(scroll.getSize());
-        System.out.println(bottomInputPanel.getSize());
-        if(textFields.size() > 15){
+        //System.out.println(bottomInputPanel.getSize());
+        //if(textFields.size() > 15){
             
-        }
+        //}
         
         
         //make the primary text fields uneditable (this is the textfield that the statement compares to when using delete or update statements
