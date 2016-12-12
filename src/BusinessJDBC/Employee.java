@@ -1,4 +1,4 @@
-package Employee;
+package BusinessJDBC;
 /**
  * This is the super class for the employee constructor
  */
