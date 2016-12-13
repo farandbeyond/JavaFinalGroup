@@ -33,7 +33,7 @@ public class GUIFinal extends JFrame
                    //panels for HR tab
                    employeePanel, employeePositionInfoPanel, employeeTypeInfoPanel, employeeBasicInfoPanel, employeeSelectPanel, hrDropdownHolderPanel,
                    //panels for INV tab
-                   productPanel, productInfoPanel, productDropdownPanel, productSelectManufacturerPanel, manufacturerPanel, manufacturerDropdownPanel,
+                   productPanel, productInfoPanel, productDropdownPanel, productSelectManufacturerPanel, manufacturerPanel, manufacturerInfoPanel, manufacturerDropdownPanel,
             
                    headPanel, salesPanel, mainSalesTop, mainSalesCenter, mainSalesBottom,
                    customerPanel, mainCustomerTop, mainCustomerCenter, mainCustomerBottom,
@@ -423,22 +423,92 @@ public class GUIFinal extends JFrame
     private void buildINVManufacturerPanel() 
     {
         manufacturerPanel = new JPanel();
+        manufacturerInfoPanel = new JPanel();
         manufacturerDropdownPanel = new JPanel();
-        
         
         //initializing the combo box for selecting manufacturer options and populating it with the possible options
         selectINVManufacturer = new JComboBox<String>(MANUFACTURER_OPTIONS);
         selectINVManufacturer.setMaximumRowCount(MANUFACTURER_OPTIONS.length);
         
-        selectINVManufacturer.addActionListener(
-                new ActionListener()
-                {
-                  @Override
-                  public void actionPerformed(ActionEvent event)
-                  {
-                      
-                  }
-            
+        selectINVManufacturer.addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent event) {
+                footPanel.removeAll();
+
+                //if the user selects "Creates Customer"
+                if (selectINVManufacturer.getSelectedItem() == "Create Manufacturer") {
+
+                    footPanel.removeAll();
+                    pack();
+                    createManufacturerButton = new JButton("Create Manufacturer");
+                    footPanel.add(createManufacturerButton);
+
+                    clearFormButton = new JButton("Clear Form");
+
+                    //clear form actionEvent
+                    clearFormButton.addActionListener((ActionEvent a) -> {
+                        txtManufacturerName.setText("");
+                        txtManufacturerContactNum.setText("");
+                        txtManufacturerAddress.setText("");
+                    });
+
+                    footPanel.add(clearFormButton);
+
+                    exitButton = new JButton("Exit");
+                    //exit button action listener
+                    exitButton.addActionListener(e -> exit());
+                    footPanel.add(exitButton);
+                    pack();
+                } //if the user selects "Search Customers"
+                else if (selectINVManufacturer.getSelectedItem() == "Search Manufacturer") {
+
+                    footPanel.removeAll();
+                    pack();
+                    searchEmployeeButton = new JButton("Search Manufacturer");
+                    footPanel.add(searchEmployeeButton);
+
+                    clearFormButton = new JButton("Clear Form");
+                    clearFormButton.addActionListener((ActionEvent e) -> {
+                        txtManufacturerName.setText("");
+                        txtManufacturerContactNum.setText("");
+                        txtManufacturerAddress.setText("");
+                    });
+                    footPanel.add(clearFormButton);
+
+                    exitButton = new JButton("Exit");
+                    exitButton.addActionListener(e -> exit());
+                    footPanel.add(exitButton);
+                    pack();
+                } //if the user selects "Edit Customers"
+                else if (selectINVManufacturer.getSelectedItem() == "Edit Manufacturer") {
+
+                    footPanel.removeAll();
+                    pack();
+                    searchManufacturerButton = new JButton("Search Manufacturer");
+                    footPanel.add(searchManufacturerButton);
+
+                    editManufacturerButton = new JButton("Edit Manufacturer");
+                    footPanel.add(editManufacturerButton);
+
+                    deleteManufacturerButton = new JButton("Delete Manufacturer");
+                    footPanel.add(deleteManufacturerButton);
+
+                    exitButton = new JButton("Exit");
+                    exitButton.addActionListener(e -> exit());
+                    footPanel.add(exitButton);
+                    pack();
+                } else {
+
+                    footPanel.removeAll();
+                    pack();
+                    exitButton = new JButton("Exit");
+                    exitButton.addActionListener(e -> exit());
+                    footPanel.add(exitButton);
+                    pack();
+                }
+                pack();
+            }
         });
         
         //initialize manufacturer components
@@ -450,16 +520,19 @@ public class GUIFinal extends JFrame
         txtManufacturerAddress = new JTextField(6);
         
         //set a border
-        manufacturerPanel.setBorder(
+        manufacturerInfoPanel.setBorder(
                 BorderFactory.createTitledBorder("Manufacturer Information"));
         
         //add all the components to the product panel
-        manufacturerPanel.add(lblManufacturerName);
-        manufacturerPanel.add(txtManufacturerName);
-        manufacturerPanel.add(lblManufacturerContactNum);
-        manufacturerPanel.add(txtManufacturerContactNum);
-        manufacturerPanel.add(lblManufacturerAddress);
-        manufacturerPanel.add(txtManufacturerAddress);
+        manufacturerInfoPanel.add(lblManufacturerName);
+        manufacturerInfoPanel.add(txtManufacturerName);
+        manufacturerInfoPanel.add(lblManufacturerContactNum);
+        manufacturerInfoPanel.add(txtManufacturerContactNum);
+        manufacturerInfoPanel.add(lblManufacturerAddress);
+        manufacturerInfoPanel.add(txtManufacturerAddress);
+        
+        //adding the selectINVProduct combobox to the product dropdown panel
+        manufacturerDropdownPanel.add(selectINVManufacturer);
     }
 
     private void buildINVProductPanel() 
@@ -964,6 +1037,10 @@ public class GUIFinal extends JFrame
         productPanel.add(productSelectManufacturerPanel, BorderLayout.CENTER);
         productPanel.add(productDropdownPanel, BorderLayout.SOUTH);
         
+        manufacturerPanel.setLayout(new BorderLayout());
+        manufacturerPanel.add(manufacturerInfoPanel, BorderLayout.NORTH);
+        manufacturerPanel.add(manufacturerDropdownPanel, BorderLayout.SOUTH);
+        
         mainTabbedPane.addTab("Inventory", null, invTabbedPane, "Inventory Control");
         mainTabbedPane.addTab("Sales", null, salesPanel, "Sales Control");
         mainTabbedPane.addTab("Customers", null, customerPanel, "Customer Control");
@@ -1004,6 +1081,7 @@ public class GUIFinal extends JFrame
             }
         };
         mainTabbedPane.addChangeListener(changeListener);
+        invTabbedPane.addChangeListener(changeListener);
     }
     
     private void headerSetup() {
