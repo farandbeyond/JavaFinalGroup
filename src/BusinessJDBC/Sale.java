@@ -12,14 +12,14 @@ public class Sale
 {
     private int customerID, employeeNumber;
     private Date purchaseDate;
-    private ArrayList<Product> productList;
+    private int productID;
     
-    public Sale (int customerID, int employeeNumber, ArrayList<Product> productList)
+    public Sale (int customerID, int employeeNumber, int productID)
     {
         this.customerID = customerID;
         this.employeeNumber = employeeNumber;
         this.purchaseDate = new GregorianCalendar().getTime();
-        this.productList = productList;
+        this.productID = productID;
     }
     
     public int getCustomerID()
@@ -37,28 +37,14 @@ public class Sale
         return purchaseDate;
     }
     
-    public String getProductList()
+    public int getProductID()
     {
-        String products = "";
-        
-        for(Product p: productList)
-        {
-            products = products + p.getName() + "\t " + p.getPrice() + "\n";
-        }
-        
-        return products;
+        return productID;
     }
     
-    public double getTotalCost()
+    public void setProductID(int productID)
     {
-        double total = 0;
-        
-        for(Product p: productList)
-        {
-            total += p.getCost();
-        }
-        
-        return total;
+        this.productID = productID;
     }
     public void setCustomerID(int customerID)
     {
@@ -75,16 +61,6 @@ public class Sale
         this.purchaseDate = purchaseDate;
     }
     
-    public void addProduct (Product product)
-    {
-        productList.add(product);
-    }
-    
-    public void removeProduct (Product product)
-    {
-        productList.remove(product);
-    }
-    
     @Override
     public String toString()
     {
@@ -92,8 +68,7 @@ public class Sale
         
         salesReceipt += "\nCustomer: \t\t\t" + getCustomerID();
         salesReceipt += "\nPurchase Date: \t\t" + getPurchaseDate();
-        salesReceipt += "\nProducts: \n" + getProductList();
-        salesReceipt += "\nTotal Cost: \t\t$" + getTotalCost();
+        salesReceipt += "\nProducts: \n" + getProductID();
         salesReceipt += "\nEmployee Id: \t\t" + getEmployeeNumber();
         
         return salesReceipt;

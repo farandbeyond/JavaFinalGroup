@@ -15,17 +15,14 @@ public class Manufacturer
 {
     //for(Product p:productList){
     
-    private int id, branchNum;
-    private String name, contactNumber, address, repName;
+    private int id;
+    private String name, contactNumber, address;
 
-    public Manufacturer (int id, String manufacturerName, int branchNumber, String repName,  String manufacturerContactNumber, String manufacturerAddress)
+    public Manufacturer (String manufacturerName, String manufacturerContactNumber, String manufacturerAddress)
     {
-        this.id = id;
-        this.branchNum = branchNumber;
         this.name = manufacturerName;
         this.contactNumber = manufacturerContactNumber;
         this.address = manufacturerAddress;
-        this.repName = repName;
     }
     /**
      * returns the manufacturer's name
@@ -51,15 +48,11 @@ public class Manufacturer
     {
         return this.address;
     }
-    public int getBranchNum() {
-        return branchNum;
-    }
+
     public int getId() {
         return id;
     }
-    public String getRepName() {
-        return repName;
-    }
+
     
     
     
@@ -87,15 +80,11 @@ public class Manufacturer
     {
         this.address = manufacturerAddress;
     }
-    public void setBranchNum(int branchNum) {
-        this.branchNum = branchNum;
-    }
+
     public void setId(int id) {
         this.id = id;
     }
-    public void setRepName(String repName) {
-        this.repName = repName;
-    }
+
     
     /**
      * Returns information about the manufacturer, name, contact, address

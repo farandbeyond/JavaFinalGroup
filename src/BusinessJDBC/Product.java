@@ -11,30 +11,22 @@ public class Product
 {
     private int id;
     private String name;
-    private String description;
-    private int manufacturerID;
-    private double cost;
+    private String manufacturerName;
     private double price;
     private int stock;
     private String productType;
 
     /**
      * product constructor
-     * @param id
      * @param name
-     * @param description
-     * @param manufacturerID
-     * @param cost
+     * @param manufacturerName
      * @param price
      * @param stock
      * @param productType 
      */
-    public Product(int id, String name, String description, int manufacturerID, double cost, double price, int stock, String productType) {
-        this.id = id;
+    public Product(String name, String manufacturerName, double price, int stock, String productType) {
         this.name = name;
-        this.description = description;
-        this.manufacturerID = manufacturerID;
-        this.cost = cost;
+        this.manufacturerName = manufacturerName;
         this.price = price;
         this.stock = stock;
         this.productType = productType;
@@ -45,9 +37,7 @@ public class Product
     public int getID(){
         return id;
     }
-    public String getDescirption(){
-        return description;
-    }
+
     public double getPrice(){
         return price;
     }
@@ -71,21 +61,12 @@ public class Product
     }
     
     /**
-     * returns product cost
-     * @return 
-     */
-    public double getCost()
-    {
-        return this.cost;
-    }
-    
-    /**
      * returns manufacturer information
      * @return 
      */
-    public int getManufacturerID()
+    public String getManufacturerName()
     {
-        return this.manufacturerID;
+        return this.manufacturerName;
     }
     
     /**
@@ -101,12 +82,9 @@ public class Product
         this.id = id;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setManufacturerID(int manufacturerID) {
-        this.manufacturerID = manufacturerID;
+    public void setManufacturerName(String manufacturerName)
+    {
+        this.manufacturerName = manufacturerName;
     }
 
     public void setPrice(double price) {
@@ -131,15 +109,6 @@ public class Product
     {
         this.productType = productType;
     }
-    
-    /**
-     * sets the product cost
-     * @param productCost 
-     */
-    public void setProductCost(Double productCost)
-    {
-        this.cost = productCost;
-    }
     /**
      * sets the stock
      * @param stock 
@@ -160,8 +129,8 @@ public class Product
         
         productInformation += "\nProduct Name:\t\t" + getName();
         productInformation += "\nProduct Type:\t\t" + getProductType();
-        productInformation += "\nProduct Cost:\t\t$" + getCost();
-        productInformation += "\nManufacturer ID:\t" + this.getManufacturerID();
+        productInformation += "\nProduct Price:\t\t$" + getPrice();
+        productInformation += "\nManufacturer Name:\t" + this.getManufacturerName();
         productInformation += "\nProduct Stock:\t\t" + getStock();
         
         return productInformation;
