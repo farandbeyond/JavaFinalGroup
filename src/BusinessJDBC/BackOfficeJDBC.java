@@ -269,11 +269,7 @@ public class BackOfficeJDBC extends JFrame {
             if (sales.getSelectedItem() == "Creates Sales") {
 
                 footPanel.removeAll();
-<<<<<<< HEAD
-
-=======
                 pack();
->>>>>>> refs/remotes/origin/master
                 createSalesButton = new JButton("Create Sales");
                 footPanel.add(createSalesButton);
 
@@ -296,19 +292,12 @@ public class BackOfficeJDBC extends JFrame {
                 exitButton = new JButton("Exit");
                 exitButton.addActionListener(e -> exit());
                 footPanel.add(exitButton);
-<<<<<<< HEAD
-=======
                 pack();
->>>>>>> refs/remotes/origin/master
             } //if the user selects "Search Sales"
             else if (sales.getSelectedItem() == "Search Sales") {
 
                 footPanel.removeAll();
-<<<<<<< HEAD
-
-=======
                 pack();
->>>>>>> refs/remotes/origin/master
                 searchSalesButton = new JButton("Search Sales");
                 footPanel.add(searchSalesButton);
 
@@ -326,19 +315,12 @@ public class BackOfficeJDBC extends JFrame {
                 exitButton = new JButton("Exit");
                 exitButton.addActionListener(e -> exit());
                 footPanel.add(exitButton);
-<<<<<<< HEAD
-=======
                 pack();
->>>>>>> refs/remotes/origin/master
             } //if the user selects "Edit Sales"
             else if (sales.getSelectedItem() == "Edit Sales") {
 
                 footPanel.removeAll();
-<<<<<<< HEAD
-
-=======
                 pack();
->>>>>>> refs/remotes/origin/master
                 searchSalesButton = new JButton("Search Sales");
                 footPanel.add(searchSalesButton);
 
@@ -351,10 +333,7 @@ public class BackOfficeJDBC extends JFrame {
                 exitButton = new JButton("Exit");
                 exitButton.addActionListener(e -> exit());
                 footPanel.add(exitButton);
-<<<<<<< HEAD
-=======
                 pack();
->>>>>>> refs/remotes/origin/master
             } else {
 
                 footPanel.removeAll();
@@ -367,141 +346,6 @@ public class BackOfficeJDBC extends JFrame {
         }
         );
 
-<<<<<<< HEAD
-    }
-
-    private void buildCustomerPanel() {
-        mainCustomerTop = new JPanel();
-        mainCustomerTop.setLayout(new GridLayout(3, 3));
-
-        //initialize TOP panel components
-        txtCustomerFirstName = new JTextField(16);
-        txtCustomerLastName = new JTextField(16);
-        txtBillingAddress = new JTextField(16);
-        txtPhoneNumber = new JTextField(8);
-        txtCustomerID = new JTextField(8);
-        txtSignUpDate = new JTextField(8);
-
-        //set a border for the TOP panel
-        mainCustomerTop.setBorder(
-                BorderFactory.createTitledBorder("Customer Information"));
-
-        //add the components to the TOP panel
-        mainCustomerTop.add(new JLabel("Customer First Name:"));
-        mainCustomerTop.add(txtCustomerFirstName);
-        mainCustomerTop.add(new JLabel("Customer Last Name:"));
-        mainCustomerTop.add(txtCustomerLastName);
-        mainCustomerTop.add(new JLabel("Billing Address:"));
-        mainCustomerTop.add(txtBillingAddress);
-        mainCustomerTop.add(new JLabel("Phone Number:"));
-        mainCustomerTop.add(txtPhoneNumber);
-        mainCustomerTop.add(new JLabel("Customer ID:"));
-        mainCustomerTop.add(txtCustomerID);
-        mainCustomerTop.add(new JLabel("Sign-up Date:"));
-        mainCustomerTop.add(txtSignUpDate);
-
-        //create the mainCustomerBottom panel with just a combobox
-        mainCustomerBottom = new JPanel();
-
-        mainCustomerBottom.setLayout(new FlowLayout());
-        //**Combo Boxes**\\
-        customer = new JComboBox<>(customerTypes);
-        customer.setMaximumRowCount(customerTypes.length);
-        mainCustomerBottom.add(customer);
-        customer.setSelectedIndex(-1);
-
-        //**Action Listener for Customer**\\
-        customer.addItemListener(new ItemListener() {
-
-            public void itemStateChanged(ItemEvent event) {
-                footPanel.removeAll();
-
-                //if the user selects "Creates Customer"
-                if (customer.getSelectedItem() == "Creates Customers") {
-
-                    footPanel.removeAll();
-
-                    createCustomerButton = new JButton("Create Customer");
-                    footPanel.add(createCustomerButton);
-
-                    clearFormButton = new JButton("Clear Form");
-
-                    //clear form actionEvent
-                    clearFormButton.addActionListener((ActionEvent a) -> {
-                        txtCustomerFirstName.setText("");
-                        txtCustomerLastName.setText("");
-                        txtBillingAddress.setText("");
-                        txtPhoneNumber.setText("");
-                        txtCustomerID.setText("");
-                        txtSignUpDate.setText("");
-                    });
-
-                    footPanel.add(clearFormButton);
-
-                    exitButton = new JButton("Exit");
-                    //exit button action listener
-                    exitButton.addActionListener(e -> exit());
-                    footPanel.add(exitButton);
-
-                } //if the user selects "Search Customers"
-                else if (customer.getSelectedItem() == "Search Customers") {
-
-                    footPanel.removeAll();
-
-                    searchCustomerButton = new JButton("Search Customers");
-                    footPanel.add(searchCustomerButton);
-
-                    clearFormButton = new JButton("Clear Form");
-                    clearFormButton.addActionListener(new ActionListener() {
-
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            txtCustomerFirstName.setText("");
-                            txtCustomerLastName.setText("");
-                            txtBillingAddress.setText("");
-                            txtPhoneNumber.setText("");
-                            txtCustomerID.setText("");
-                            txtSignUpDate.setText("");
-                        }
-                    });
-                    footPanel.add(clearFormButton);
-
-                    exitButton = new JButton("Exit");
-                    exitButton.addActionListener(e -> exit());
-                    footPanel.add(exitButton);
-
-                } //if the user selects "Edit Customers"
-                else if (customer.getSelectedItem() == "Edit Customers") {
-
-                    footPanel.removeAll();
-
-                    searchCustomerButton = new JButton("Search Customers");
-                    footPanel.add(searchCustomerButton);
-
-                    editCustomerButton = new JButton("Edit Customers");
-                    footPanel.add(editCustomerButton);
-
-                    deleteCustomerButton = new JButton("Delete Customers");
-                    footPanel.add(deleteCustomerButton);
-
-                    exitButton = new JButton("Exit");
-                    exitButton.addActionListener(e -> exit());
-                    footPanel.add(exitButton);
-                } else {
-
-                    footPanel.removeAll();
-
-                    exitButton = new JButton("Exit");
-                    exitButton.addActionListener(e -> exit());
-                    footPanel.add(exitButton);
-                }
-                pack();
-            }
-        });
-
-    }
-
-=======
     }
 
     private void buildCustomerPanel() {
@@ -634,7 +478,6 @@ public class BackOfficeJDBC extends JFrame {
 
     }
 
->>>>>>> refs/remotes/origin/master
     private void tabbedPaneSetup() {
         invTabbedPane = new JTabbedPane();
         invTabbedPane.addTab("Product", null, productPane, "Product Control");
@@ -650,31 +493,6 @@ public class BackOfficeJDBC extends JFrame {
         }
 
         //make a change listener that resets the footpanel when you change tabs on the mainTab
-<<<<<<< HEAD
-        ChangeListener changeListener = new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent changeEvent) {
-                JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
-                int index = sourceTabbedPane.getSelectedIndex();
-
-                if (sourceTabbedPane.getTitleAt(index).equals("HR")) {
-                    footPanel.removeAll();
-
-                    exitButton = new JButton("Exit");
-                    exitButton.addActionListener(f -> exit());
-                    footPanel.add(exitButton);
-                    pack();
-                } else {
-                    footPanel.removeAll();
-
-                    exitButton = new JButton("Exit");
-                    exitButton.addActionListener(f -> exit());
-                    footPanel.add(exitButton);
-                    pack();
-                }
-            }
-
-=======
         ChangeListener changeListener = (ChangeEvent changeEvent) -> {
             JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
             int index = sourceTabbedPane.getSelectedIndex();
@@ -694,7 +512,6 @@ public class BackOfficeJDBC extends JFrame {
                 footPanel.add(exitButton);
                 pack();
             }
->>>>>>> refs/remotes/origin/master
         };
         mainTabbedPane.addChangeListener(changeListener);
     }
