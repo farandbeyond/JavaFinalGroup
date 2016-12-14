@@ -22,6 +22,7 @@ import javax.swing.event.ChangeListener;
  */
 public class GUIFinal extends JFrame
 {
+
     private final static String dbLogin = "gc200313751", dbPass = "HBw?UQ--", dbConnect = "sql.computerstudi.es:3306/gc200313751";
     
     //** Panels **\\
@@ -47,7 +48,6 @@ public class GUIFinal extends JFrame
     private JLabel lblTitle,
         //employee position info
                    lblFirstName, lblLastName, lblBirthdate, lblAddress, lblGender, lblContactNum, lblEmpTitle, lblEmpNum, lblEmpSIN,
-        //employee type info
                    lblCommissionRate, lblTotalSales, lblPayRate, lblHoursWorked, lblSalary,
         //product info
                    lblProductName, lblProductType, lblProductPrice, lblProductStock,
@@ -57,8 +57,10 @@ public class GUIFinal extends JFrame
                    lblSearch;
     
     //** Textfields **\\
+
         //employee position info
     private JTextField txtFirstName, txtLastName, txtBirthdate, txtDay, txtMonth, txtYear, txtAddress, txtGender, txtEmployeeID, txtContactNum, txtEmpTitle, txtEmpNum, txtEmpSIN,
+
         //employee type info
                        txtCommissionRate, txtTotalSales, txtPayRate, txtHoursWorked, txtSalary,
         //product info
@@ -66,15 +68,18 @@ public class GUIFinal extends JFrame
         //manufacturer info
                        txtManufacturerName, txtManufacturerContactNum, txtManufacturerAddress,
         //search textfield
+
                        txtSearch,
             
             
             txtCustomerID, txtEmpNo, txtProdID, txtPurchaseDate, txtTotalCost, txtPotentialCommission,
             txtCustomerFirstName, txtCustomerLastName, txtBillingAddress, txtPhoneNumber, txtSignUpDate, txtSalesCustomerID;
+
     
     //** Dropdown lists **\\
     private JComboBox<String> selectEmpType, selectHR, 
                               selectINVProduct, selectProductManufacturer, 
+
                               selectINVManufacturer,
                               sales, customer;
     
@@ -104,7 +109,6 @@ public class GUIFinal extends JFrame
     {
         super("Chill Mart");
         setLayout(new BorderLayout());
-        
         //login
         userPane = new DatabasePane(dbLogin, dbPass, dbConnect, "JavaUsers");
         userPane.setDateAutoInsert(4); // this disables input on the DATE column for 'creation date'
@@ -121,7 +125,6 @@ public class GUIFinal extends JFrame
         buildHRPanel();
         buildINVProductPanel();
         buildINVManufacturerPanel();
-        
         
         buildFootPanel();
         
@@ -243,7 +246,6 @@ public class GUIFinal extends JFrame
         //initializing the combo box for selecting employee options and populating it with the possible options
         selectHR = new JComboBox<String>(HR_OPTIONS);
         selectHR.setMaximumRowCount(HR_OPTIONS.length);
-        
         selectHR.addItemListener(new ItemListener() {
 
             @Override
@@ -379,7 +381,6 @@ public class GUIFinal extends JFrame
         //set a border for position info
         employeePositionInfoPanel.setBorder(
                 BorderFactory.createTitledBorder("Position Information"));
-        
         //adding the selectEmpType combobox to the position panel
         employeeTypeInfoPanel.add(selectEmpType);
         
@@ -437,7 +438,6 @@ public class GUIFinal extends JFrame
         employeeTypeInfoPanel.add(txtHoursWorked);
         employeeTypeInfoPanel.add(lblSalary);
         employeeTypeInfoPanel.add(txtSalary);
-        
         //making only the hourly employee inputs visible
         lblCommissionRate.setVisible(false);
         txtCommissionRate.setVisible(false);
@@ -456,9 +456,9 @@ public class GUIFinal extends JFrame
     private void buildINVManufacturerPanel() 
     {
         manufacturerPanel = new JPanel();
+        manufacturerDropdownPanel = new JPanel();
         manufacturerInfoPanel = new JPanel();
         manufacturerDropdownPanel = new JPanel();
-        
         //initializing the combo box for selecting manufacturer options and populating it with the possible options
         selectINVManufacturer = new JComboBox<String>(MANUFACTURER_OPTIONS);
         selectINVManufacturer.setMaximumRowCount(MANUFACTURER_OPTIONS.length);
@@ -571,7 +571,6 @@ public class GUIFinal extends JFrame
     private void buildINVProductPanel() 
     {
         productPanel = new JPanel();
-        
         productInfoPanel = new JPanel();
         productSelectManufacturerPanel = new JPanel();
         productDropdownPanel = new JPanel();
@@ -582,7 +581,6 @@ public class GUIFinal extends JFrame
         //initializing the combo box for selecting product options and populating it with the possible options
         selectINVProduct = new JComboBox<String>(PRODUCT_OPTIONS);
         selectINVProduct.setMaximumRowCount(PRODUCT_OPTIONS.length);
-        
         selectINVProduct.addItemListener(new ItemListener() {
 
             @Override
@@ -610,8 +608,7 @@ public class GUIFinal extends JFrame
                     footPanel.add(clearFormButton);
 
                     exitButton = new JButton("Exit");
-                    //exit button action listener
-                    exitButton.addActionListener(e -> exit());
+                    //exit button action listener                    exitButton.addActionListener(e -> exit());
                     footPanel.add(exitButton);
                     pack();
                 } //if the user selects "Search Customers"
@@ -808,7 +805,6 @@ public class GUIFinal extends JFrame
                     txtPotentialCommission.setText("");
                 });
                 footPanel.add(clearFormButton);
-
                 exitButton = new JButton("Exit");
                 exitButton.addActionListener(e -> exit());
                 footPanel.add(exitButton);
@@ -888,7 +884,6 @@ public class GUIFinal extends JFrame
 
         //**Action Listener for Customer**\\
         customer.addItemListener(new ItemListener() {
-
             @Override
             public void itemStateChanged(ItemEvent event) {
                 footPanel.removeAll();

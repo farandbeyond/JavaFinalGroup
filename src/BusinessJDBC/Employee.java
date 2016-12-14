@@ -14,7 +14,7 @@ public abstract class Employee
     private String firstName, lastName, gender, phoneNumber, 
             employeeAddress, title, employeeStatus;
     private int employeeNumber, employeeSIN;
-    private Date hireDate;
+    private GregorianCalendar hireDate;
     private GregorianCalendar dateOfBirth;
     private double weeklySalary;
 
@@ -47,7 +47,7 @@ public abstract class Employee
         this.dateOfBirth.set(Calendar.MONTH, month - 1);
         this.dateOfBirth.set(Calendar.DATE, day);
         
-        this.hireDate = new GregorianCalendar().getTime();
+        this.hireDate = new GregorianCalendar();
         this.title = title;
     }
     
@@ -118,7 +118,7 @@ public abstract class Employee
      * gets the date the employee was hired
      * @return 
      */
-    public Date getDateHired()
+    public GregorianCalendar getDateHired()
     {
         return this.hireDate;
     }
@@ -127,14 +127,14 @@ public abstract class Employee
      * this returns the employee's birthday
      * @return 
      */
-    public Date getBirthday()
+    public GregorianCalendar getBirthday()
     {
-        Date currentDate = new GregorianCalendar().getTime();
+        GregorianCalendar currentDate = new GregorianCalendar();
         
         if (dateOfBirth == null)
         {
             return currentDate;
-        } else return dateOfBirth.getTime();
+        } else return dateOfBirth;
     }
     
     /**
@@ -176,7 +176,7 @@ public abstract class Employee
     {
         GregorianCalendar currentDate = new GregorianCalendar();
         int currentYear = currentDate.get(Calendar.YEAR);
-        int yearHired = hireDate.getYear();
+        int yearHired = hireDate.get(Calendar.YEAR);
         int yearsHired = currentYear - yearHired;
         
         return yearsHired;
@@ -254,7 +254,7 @@ public abstract class Employee
         newDate.set(Calendar.MONTH, month - 1);
         newDate.set(Calendar.DATE, day);
         
-        this.hireDate = newDate.getTime();
+        this.hireDate = newDate;
     }
     
     /**
