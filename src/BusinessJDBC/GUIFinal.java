@@ -31,7 +31,7 @@ public class GUIFinal extends JFrame
     
     private JPanel titlePanel,
                    //panels for HR tab
-                   employeePanel, employeePositionInfoPanel, employeeTypeInfoPanel, employeeBasicInfoPanel, employeeSelectPanel, hrDropdownHolderPanel,
+                   employeePanel, employeePositionInfoPanel, employeeTypeInfoPanel, employeeBasicInfoPanel, employeeSelectPanel, hrDropdownHolderPanel, employeeBirthdayPanel,
                    //panels for INV tab
                    productPanel, productInfoPanel, productDropdownPanel, productSelectManufacturerPanel, manufacturerPanel, manufacturerInfoPanel, manufacturerDropdownPanel,
             
@@ -46,7 +46,7 @@ public class GUIFinal extends JFrame
     //panel labels
     private JLabel lblTitle,
         //employee position info
-                   lblFirstName, lblLastName, lblBirthdate, lblAddress, lblGender, lblContactNum, lblEmpTitle, lblEmpNum, 
+                   lblFirstName, lblLastName, lblBirthdate, lblAddress, lblGender, lblContactNum, lblEmpTitle, lblEmpNum, lblEmpSIN,
         //employee type info
                    lblCommissionRate, lblTotalSales, lblPayRate, lblHoursWorked, lblSalary,
         //product info
@@ -58,7 +58,7 @@ public class GUIFinal extends JFrame
     
     //** Textfields **\\
         //employee position info
-    private JTextField txtFirstName, txtLastName, txtBirthdate, txtAddress, txtGender, txtEmployeeID, txtContactNum, txtEmpTitle, txtEmpNum,
+    private JTextField txtFirstName, txtLastName, txtBirthdate, txtDay, txtMonth, txtYear, txtAddress, txtGender, txtEmployeeID, txtContactNum, txtEmpTitle, txtEmpNum, txtEmpSIN,
         //employee type info
                        txtCommissionRate, txtTotalSales, txtPayRate, txtHoursWorked, txtSalary,
         //product info
@@ -180,6 +180,7 @@ public class GUIFinal extends JFrame
         employeePositionInfoPanel = new JPanel(); 
         employeePositionInfoPanel.setLayout(new GridLayout(3, 3));
         employeeTypeInfoPanel = new JPanel();
+        employeeBirthdayPanel = new JPanel();
         hrDropdownHolderPanel = new JPanel();
         
         //initializing the employee type combo box and populating it with the employee types
@@ -274,6 +275,10 @@ public class GUIFinal extends JFrame
                         txtPayRate.setText("");
                         txtHoursWorked.setText("");
                         txtSalary.setText("");
+                        txtEmpSIN.setText("");
+                        txtDay.setText("");
+                        txtMonth.setText("");
+                        txtYear.setText("");
                     });
 
                     footPanel.add(clearFormButton);
@@ -306,6 +311,10 @@ public class GUIFinal extends JFrame
                         txtPayRate.setText("");
                         txtHoursWorked.setText("");
                         txtSalary.setText("");
+                        txtEmpSIN.setText("");
+                        txtDay.setText("");
+                        txtMonth.setText("");
+                        txtYear.setText("");
                     });
                     footPanel.add(clearFormButton);
 
@@ -350,7 +359,10 @@ public class GUIFinal extends JFrame
         lblLastName = new JLabel("Last Name:");
         txtLastName = new JTextField(10);
         lblBirthdate = new JLabel("Birth Date:");
-        txtBirthdate = new JTextField(10);
+        //txtBirthdate = new JTextField(10);
+        txtYear = new JTextField(4);
+        txtMonth = new JTextField(2);
+        txtDay = new JTextField(2);
         lblGender = new JLabel("Gender:");
         txtGender = new JTextField(2);
         lblAddress = new JLabel("Address:");
@@ -361,6 +373,8 @@ public class GUIFinal extends JFrame
         txtEmpTitle = new JTextField(10);
         lblEmpNum = new JLabel("Employee Num:");
         txtEmpNum = new JTextField(10);
+        lblEmpSIN = new JLabel("SIN:");
+        txtEmpSIN = new JTextField(8);
         
         //set a border for position info
         employeePositionInfoPanel.setBorder(
@@ -385,13 +399,19 @@ public class GUIFinal extends JFrame
         employeeTypeInfoPanel.setBorder(
                 BorderFactory.createTitledBorder("Type Information"));
         
+        //add birthday info to birthday panel
+        employeeBirthdayPanel.setLayout(new GridLayout(1,3));
+        employeeBirthdayPanel.add(txtYear);
+        employeeBirthdayPanel.add(txtMonth);
+        employeeBirthdayPanel.add(txtDay);
+        
         //add the components to the employee position info subpanel
         employeePositionInfoPanel.add(lblFirstName);
         employeePositionInfoPanel.add(txtFirstName);
         employeePositionInfoPanel.add(lblLastName);
         employeePositionInfoPanel.add(txtLastName);
         employeePositionInfoPanel.add(lblBirthdate);
-        employeePositionInfoPanel.add(txtBirthdate);
+        employeePositionInfoPanel.add(employeeBirthdayPanel);
         employeePositionInfoPanel.add(lblGender);
         employeePositionInfoPanel.add(txtGender);
         employeePositionInfoPanel.add(lblAddress);
@@ -402,6 +422,8 @@ public class GUIFinal extends JFrame
         employeePositionInfoPanel.add(txtEmpTitle);
         employeePositionInfoPanel.add(lblEmpNum);
         employeePositionInfoPanel.add(txtEmpNum);
+        employeePositionInfoPanel.add(lblEmpSIN);
+        employeePositionInfoPanel.add(txtEmpSIN);
         
         //adding the components to the type info panel
         employeeTypeInfoPanel.add(lblCommissionRate);
@@ -1126,6 +1148,10 @@ public class GUIFinal extends JFrame
                         txtPayRate.setText("");
                         txtHoursWorked.setText("");
                         txtSalary.setText("");
+                        txtEmpSIN.setText("");
+                        txtDay.setText("");
+                        txtMonth.setText("");
+                        txtYear.setText("");
                     });
 
                     footPanel.add(clearFormButton);
@@ -1310,6 +1336,10 @@ public class GUIFinal extends JFrame
                         txtPayRate.setText("");
                         txtHoursWorked.setText("");
                         txtSalary.setText("");
+                        txtEmpSIN.setText("");
+                        txtDay.setText("");
+                        txtMonth.setText("");
+                        txtYear.setText("");
                     });
 
                     footPanel.add(clearFormButton);
