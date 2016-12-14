@@ -16,7 +16,7 @@ public class Customer
 {
      private String firstName, lastName, billingAddress, phoneNumber;
      private int customerID;
-     private Date signUpDate;
+     private GregorianCalendar signUpDate;
      
      public Customer (String firstName, String lastName, String billingAddress, String phoneNumber, int customerID)
      {
@@ -25,7 +25,7 @@ public class Customer
          this.billingAddress = billingAddress;
          this.phoneNumber = phoneNumber;
          this.customerID = customerID;
-         this.signUpDate = new GregorianCalendar().getTime();
+         this.signUpDate = new GregorianCalendar();
      }
      
      public String getFirstName()
@@ -53,7 +53,7 @@ public class Customer
          return customerID;
      }
      
-     public Date getSignUpDate()
+     public GregorianCalendar getSignUpDate()
      {
          return signUpDate;
      }
