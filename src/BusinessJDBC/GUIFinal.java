@@ -33,7 +33,7 @@ public class GUIFinal extends JFrame
                    //panels for HR tab
                    employeePanel, employeePositionInfoPanel, employeeTypeInfoPanel, employeeBasicInfoPanel, employeeSelectPanel, hrDropdownHolderPanel,
                    //panels for INV tab
-                   productPanel, productInfoPanel, productDropdownPanel, productSelectManufacturerPanel, manufacturerPanel, manufacturerDropdownPanel,
+                   productPanel, productInfoPanel, productDropdownPanel, productSelectManufacturerPanel, manufacturerPanel, manufacturerInfoPanel, manufacturerDropdownPanel,
             
                    headPanel, salesPanel, mainSalesTop, mainSalesCenter, mainSalesBottom,
                    customerPanel, mainCustomerTop, mainCustomerCenter, mainCustomerBottom,
@@ -78,10 +78,10 @@ public class GUIFinal extends JFrame
                               selectINVManufacturer,
                               sales, customer;
     
-    private static final String[] EMP_TYPES = {"(Select an Employee Type)", "Hourly", "Salary", "Commission"},
-                                  HR_OPTIONS = {"", "Create Employee", "Search Employee", "Edit Employee"},
-                                  PRODUCT_OPTIONS = {"", "Create Product", "Search Product", "Edit Product"},
-                                  MANUFACTURER_OPTIONS = {"", "Create Manufacturer", "Search Manufacturer", "Edit Manufacturer"},
+    private static final String[] EMP_TYPES = {"Hourly", "Salary", "Commission"},
+                                  HR_OPTIONS = {"Create Employee", "Search Employee", "Edit Employee"},
+                                  PRODUCT_OPTIONS = {"Create Product", "Search Product", "Edit Product"},
+                                  MANUFACTURER_OPTIONS = {"Create Manufacturer", "Search Manufacturer", "Edit Manufacturer"},
                                   customerTypes = {"Creates Customers", "Search Customers", "Edit Customers"},
                                   salesTypes = {"Creates Sales", "Search Sales", "Edit Sales"};
     
@@ -416,6 +416,17 @@ public class GUIFinal extends JFrame
         employeeTypeInfoPanel.add(lblSalary);
         employeeTypeInfoPanel.add(txtSalary);
         
+        //making only the hourly employee inputs visible
+        lblCommissionRate.setVisible(false);
+        txtCommissionRate.setVisible(false);
+        lblTotalSales.setVisible(false);
+        txtTotalSales.setVisible(false);
+        lblPayRate.setVisible(true);
+        txtPayRate.setVisible(true);
+        lblHoursWorked.setVisible(true);
+        txtHoursWorked.setVisible(true);
+        lblSalary.setVisible(false);
+        txtSalary.setVisible(false);
         //adding the selectHR combobox to the 
         hrDropdownHolderPanel.add(selectHR);
     }
@@ -423,22 +434,92 @@ public class GUIFinal extends JFrame
     private void buildINVManufacturerPanel() 
     {
         manufacturerPanel = new JPanel();
+        manufacturerInfoPanel = new JPanel();
         manufacturerDropdownPanel = new JPanel();
-        
         
         //initializing the combo box for selecting manufacturer options and populating it with the possible options
         selectINVManufacturer = new JComboBox<String>(MANUFACTURER_OPTIONS);
         selectINVManufacturer.setMaximumRowCount(MANUFACTURER_OPTIONS.length);
         
-        selectINVManufacturer.addActionListener(
-                new ActionListener()
-                {
-                  @Override
-                  public void actionPerformed(ActionEvent event)
-                  {
-                      
-                  }
-            
+        selectINVManufacturer.addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent event) {
+                footPanel.removeAll();
+
+                //if the user selects "Creates Customer"
+                if (selectINVManufacturer.getSelectedItem() == "Create Manufacturer") {
+
+                    footPanel.removeAll();
+                    pack();
+                    createManufacturerButton = new JButton("Create Manufacturer");
+                    footPanel.add(createManufacturerButton);
+
+                    clearFormButton = new JButton("Clear Form");
+
+                    //clear form actionEvent
+                    clearFormButton.addActionListener((ActionEvent a) -> {
+                        txtManufacturerName.setText("");
+                        txtManufacturerContactNum.setText("");
+                        txtManufacturerAddress.setText("");
+                    });
+
+                    footPanel.add(clearFormButton);
+
+                    exitButton = new JButton("Exit");
+                    //exit button action listener
+                    exitButton.addActionListener(e -> exit());
+                    footPanel.add(exitButton);
+                    pack();
+                } //if the user selects "Search Customers"
+                else if (selectINVManufacturer.getSelectedItem() == "Search Manufacturer") {
+
+                    footPanel.removeAll();
+                    pack();
+                    searchEmployeeButton = new JButton("Search Manufacturer");
+                    footPanel.add(searchEmployeeButton);
+
+                    clearFormButton = new JButton("Clear Form");
+                    clearFormButton.addActionListener((ActionEvent e) -> {
+                        txtManufacturerName.setText("");
+                        txtManufacturerContactNum.setText("");
+                        txtManufacturerAddress.setText("");
+                    });
+                    footPanel.add(clearFormButton);
+
+                    exitButton = new JButton("Exit");
+                    exitButton.addActionListener(e -> exit());
+                    footPanel.add(exitButton);
+                    pack();
+                } //if the user selects "Edit Customers"
+                else if (selectINVManufacturer.getSelectedItem() == "Edit Manufacturer") {
+
+                    footPanel.removeAll();
+                    pack();
+                    searchManufacturerButton = new JButton("Search Manufacturer");
+                    footPanel.add(searchManufacturerButton);
+
+                    editManufacturerButton = new JButton("Edit Manufacturer");
+                    footPanel.add(editManufacturerButton);
+
+                    deleteManufacturerButton = new JButton("Delete Manufacturer");
+                    footPanel.add(deleteManufacturerButton);
+
+                    exitButton = new JButton("Exit");
+                    exitButton.addActionListener(e -> exit());
+                    footPanel.add(exitButton);
+                    pack();
+                } else {
+
+                    footPanel.removeAll();
+                    pack();
+                    exitButton = new JButton("Exit");
+                    exitButton.addActionListener(e -> exit());
+                    footPanel.add(exitButton);
+                    pack();
+                }
+                pack();
+            }
         });
         
         //initialize manufacturer components
@@ -450,16 +531,19 @@ public class GUIFinal extends JFrame
         txtManufacturerAddress = new JTextField(6);
         
         //set a border
-        manufacturerPanel.setBorder(
+        manufacturerInfoPanel.setBorder(
                 BorderFactory.createTitledBorder("Manufacturer Information"));
         
         //add all the components to the product panel
-        manufacturerPanel.add(lblManufacturerName);
-        manufacturerPanel.add(txtManufacturerName);
-        manufacturerPanel.add(lblManufacturerContactNum);
-        manufacturerPanel.add(txtManufacturerContactNum);
-        manufacturerPanel.add(lblManufacturerAddress);
-        manufacturerPanel.add(txtManufacturerAddress);
+        manufacturerInfoPanel.add(lblManufacturerName);
+        manufacturerInfoPanel.add(txtManufacturerName);
+        manufacturerInfoPanel.add(lblManufacturerContactNum);
+        manufacturerInfoPanel.add(txtManufacturerContactNum);
+        manufacturerInfoPanel.add(lblManufacturerAddress);
+        manufacturerInfoPanel.add(txtManufacturerAddress);
+        
+        //adding the selectINVProduct combobox to the product dropdown panel
+        manufacturerDropdownPanel.add(selectINVManufacturer);
     }
 
     private void buildINVProductPanel() 
@@ -650,7 +734,7 @@ public class GUIFinal extends JFrame
         sales = new JComboBox<>(salesTypes);
         sales.setMaximumRowCount(salesTypes.length);
         mainSalesBottom.add(sales);
-        sales.setSelectedIndex(-1);
+        //sales.setSelectedIndex(-1);
 
         //**Action Listener for Sales**\\
         sales.addItemListener((ItemEvent event) -> {
@@ -778,7 +862,7 @@ public class GUIFinal extends JFrame
         customer = new JComboBox<>(customerTypes);
         customer.setMaximumRowCount(customerTypes.length);
         mainCustomerBottom.add(customer);
-        customer.setSelectedIndex(-1);
+        //customer.setSelectedIndex(-1);
 
         //**Action Listener for Customer**\\
         customer.addItemListener(new ItemListener() {
@@ -874,9 +958,37 @@ public class GUIFinal extends JFrame
     {
         //create the panel
         footPanel = new JPanel();
-        btnExit = new JButton("Exit");
-        btnExit.addActionListener(new ExitButtonHandler());
-        footPanel.add(btnExit);
+        footPanel.removeAll();
+                pack();
+                createEmployeeButton = new JButton("Create Employee");
+                    footPanel.add(createEmployeeButton);
+
+                    clearFormButton = new JButton("Clear Form");
+
+                    //clear form actionEvent
+                    clearFormButton.addActionListener((ActionEvent a) -> {
+                        txtFirstName.setText("");
+                        txtLastName.setText("");
+                        txtBirthdate.setText("");
+                        txtAddress.setText("");
+                        txtGender.setText("");
+                        txtContactNum.setText("");
+                        txtEmpTitle.setText("");
+                        txtEmpNum.setText("");
+                        txtCommissionRate.setText("");
+                        txtTotalSales.setText("");
+                        txtPayRate.setText("");
+                        txtHoursWorked.setText("");
+                        txtSalary.setText("");
+                    });
+
+                    footPanel.add(clearFormButton);
+
+                    exitButton = new JButton("Exit");
+                    //exit button action listener
+                    exitButton.addActionListener(e -> exit());
+                    footPanel.add(exitButton);
+                    pack();
     }
     
     //Handler for the create button
@@ -930,7 +1042,7 @@ public class GUIFinal extends JFrame
     }
     
     //Handler for the exit button, brings up a confirmation panel and shuts down the program upon confirmation
-    private class ExitButtonHandler implements ActionListener
+    /*private class ExitButtonHandler implements ActionListener
     {
         @Override
         public void actionPerformed(ActionEvent event)
@@ -939,7 +1051,7 @@ public class GUIFinal extends JFrame
                     "Exit", JOptionPane.YES_NO_OPTION)== 3);
             System.exit(0);
         }
-    }
+    }*/
     
     //lambda button functions
     private void exit() {
@@ -963,6 +1075,10 @@ public class GUIFinal extends JFrame
         productPanel.add(productInfoPanel, BorderLayout.NORTH);
         productPanel.add(productSelectManufacturerPanel, BorderLayout.CENTER);
         productPanel.add(productDropdownPanel, BorderLayout.SOUTH);
+        
+        manufacturerPanel.setLayout(new BorderLayout());
+        manufacturerPanel.add(manufacturerInfoPanel, BorderLayout.NORTH);
+        manufacturerPanel.add(manufacturerDropdownPanel, BorderLayout.SOUTH);
         
         mainTabbedPane.addTab("Inventory", null, invTabbedPane, "Inventory Control");
         mainTabbedPane.addTab("Sales", null, salesPanel, "Sales Control");
@@ -990,11 +1106,167 @@ public class GUIFinal extends JFrame
             if (sourceTabbedPane.getTitleAt(index).equals("HR")) {
                 footPanel.removeAll();
                 pack();
+                createEmployeeButton = new JButton("Create Employee");
+                    footPanel.add(createEmployeeButton);
+
+                    clearFormButton = new JButton("Clear Form");
+
+                    //clear form actionEvent
+                    clearFormButton.addActionListener((ActionEvent a) -> {
+                        txtFirstName.setText("");
+                        txtLastName.setText("");
+                        txtBirthdate.setText("");
+                        txtAddress.setText("");
+                        txtGender.setText("");
+                        txtContactNum.setText("");
+                        txtEmpTitle.setText("");
+                        txtEmpNum.setText("");
+                        txtCommissionRate.setText("");
+                        txtTotalSales.setText("");
+                        txtPayRate.setText("");
+                        txtHoursWorked.setText("");
+                        txtSalary.setText("");
+                    });
+
+                    footPanel.add(clearFormButton);
                 exitButton = new JButton("Exit");
                 exitButton.addActionListener(f -> exit());
                 footPanel.add(exitButton);
                 pack();
-            } else {
+            } 
+            
+            else if (sourceTabbedPane.getTitleAt(index).equals("Inventory")) {
+                footPanel.removeAll();
+                pack();
+                createEmployeeButton = new JButton("Create Product");
+                    footPanel.add(createEmployeeButton);
+
+                    clearFormButton = new JButton("Clear Form");
+
+                    //clear form actionEvent
+                    clearFormButton.addActionListener((ActionEvent a) -> {
+                        
+                        txtProductName.setText("");
+                        txtProductType.setText("");
+                        txtProductPrice.setText("");
+                        txtProductStock.setText("");
+                    });
+
+                    footPanel.add(clearFormButton);
+
+                    exitButton = new JButton("Exit");
+                    //exit button action listener
+                    exitButton.addActionListener(e -> exit());
+                    footPanel.add(exitButton);
+                    pack();
+            }
+            
+            else if (sourceTabbedPane.getTitleAt(index).equals("Product")) {
+                footPanel.removeAll();
+                pack();
+                createEmployeeButton = new JButton("Create Product");
+                    footPanel.add(createEmployeeButton);
+
+                    clearFormButton = new JButton("Clear Form");
+
+                    //clear form actionEvent
+                    clearFormButton.addActionListener((ActionEvent a) -> {
+                        
+                        txtProductName.setText("");
+                        txtProductType.setText("");
+                        txtProductPrice.setText("");
+                        txtProductStock.setText("");
+                    });
+
+                    footPanel.add(clearFormButton);
+
+                    exitButton = new JButton("Exit");
+                    //exit button action listener
+                    exitButton.addActionListener(e -> exit());
+                    footPanel.add(exitButton);
+                    pack();
+            }
+            
+            else if (sourceTabbedPane.getTitleAt(index).equals("Manufacturer")) {
+                footPanel.removeAll();
+                pack();
+                createEmployeeButton = new JButton("Create Manufacturer");
+                    footPanel.add(createEmployeeButton);
+
+                    clearFormButton = new JButton("Clear Form");
+
+                    //clear form actionEvent
+                    clearFormButton.addActionListener((ActionEvent a) -> {
+                        
+                        txtManufacturerName.setText("");
+                        txtManufacturerContactNum.setText("");
+                        txtManufacturerAddress.setText("");
+                    });
+
+                    footPanel.add(clearFormButton);
+
+                    exitButton = new JButton("Exit");
+                    //exit button action listener
+                    exitButton.addActionListener(e -> exit());
+                    footPanel.add(exitButton);
+                    pack();
+            }
+            
+            else if (sourceTabbedPane.getTitleAt(index).equals("Sales")) {
+                footPanel.removeAll();
+                pack();
+                createEmployeeButton = new JButton("Create Sales");
+                    footPanel.add(createEmployeeButton);
+
+                    clearFormButton = new JButton("Clear Form");
+
+                    //clear form actionEvent
+                    clearFormButton.addActionListener((ActionEvent a) -> {
+                        txtSalesCustomerID.setText("");
+                    txtEmpNo.setText("");
+                    txtProdID.setText("");
+                    txtPurchaseDate.setText("");
+                    txtTotalCost.setText("");
+                    txtPotentialCommission.setText("");
+                    });
+
+                    footPanel.add(clearFormButton);
+
+                    exitButton = new JButton("Exit");
+                    //exit button action listener
+                    exitButton.addActionListener(e -> exit());
+                    footPanel.add(exitButton);
+                    pack();
+            }
+            
+            else if (sourceTabbedPane.getTitleAt(index).equals("Customers")) {
+                footPanel.removeAll();
+                pack();
+                createEmployeeButton = new JButton("Create Customers");
+                    footPanel.add(createEmployeeButton);
+
+                    clearFormButton = new JButton("Clear Form");
+
+                    //clear form actionEvent
+                    clearFormButton.addActionListener((ActionEvent a) -> {
+                        txtCustomerFirstName.setText("");
+                        txtCustomerLastName.setText("");
+                        txtBillingAddress.setText("");
+                        txtPhoneNumber.setText("");
+                        txtCustomerID.setText("");
+                        txtSignUpDate.setText("");
+                    });
+
+                    footPanel.add(clearFormButton);
+
+                    exitButton = new JButton("Exit");
+                    //exit button action listener
+                    exitButton.addActionListener(e -> exit());
+                    footPanel.add(exitButton);
+                    pack();
+            }
+            
+            else {
                 footPanel.removeAll();
                 pack();
                 exitButton = new JButton("Exit");
@@ -1004,6 +1276,7 @@ public class GUIFinal extends JFrame
             }
         };
         mainTabbedPane.addChangeListener(changeListener);
+        invTabbedPane.addChangeListener(changeListener);
     }
     
     private void headerSetup() {
@@ -1011,10 +1284,41 @@ public class GUIFinal extends JFrame
         headPanel = new JPanel();
         headPanel.add(new JLabel("Welcome " + username));
     }
-
+    
     private void footerSetup() {
         //setting up footer
         footPanel = new JPanel();
+        footPanel.removeAll();
+                pack();
+                createEmployeeButton = new JButton("Create Employee");
+                    footPanel.add(createEmployeeButton);
+
+                    clearFormButton = new JButton("Clear Form");
+
+                    //clear form actionEvent
+                    clearFormButton.addActionListener((ActionEvent a) -> {
+                        txtFirstName.setText("");
+                        txtLastName.setText("");
+                        txtBirthdate.setText("");
+                        txtAddress.setText("");
+                        txtGender.setText("");
+                        txtContactNum.setText("");
+                        txtEmpTitle.setText("");
+                        txtEmpNum.setText("");
+                        txtCommissionRate.setText("");
+                        txtTotalSales.setText("");
+                        txtPayRate.setText("");
+                        txtHoursWorked.setText("");
+                        txtSalary.setText("");
+                    });
+
+                    footPanel.add(clearFormButton);
+
+                    exitButton = new JButton("Exit");
+                    //exit button action listener
+                    exitButton.addActionListener(e -> exit());
+                    footPanel.add(exitButton);
+                    pack();
         exitButton = new JButton("Exit");
         exitButton.addActionListener(e -> exit());
         footPanel.add(exitButton);
